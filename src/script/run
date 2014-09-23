@@ -202,7 +202,8 @@ then
 	sleep 2
 fi
 
-export | egrep " LM_PLUGIN_PATH=|LM_USE_SESSION_BUS=| DBUS_SESSION_BUS_ADDRESS=| LD_LIBRARY_PATH=| PATH=| DISPLAY=" >env.sh
+#export | egrep " LM_PLUGIN_PATH=|LM_USE_SESSION_BUS=| DBUS_SESSION_BUS_ADDRESS=| LD_LIBRARY_PATH=| PATH=| DISPLAY=" >env.sh
+export | egrep " LM_PLUGIN_PATH=|LM_USE_SESSION_BUS=| DBUS_SESSION_BUS_ADDRESS=| LD_LIBRARY_PATH=| PATH=| DISPLAY=| QT_QPA_PLATFORM=" >env.sh
 
 trap "terminate" EXIT INT
 set -e #exit on error now

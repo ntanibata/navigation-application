@@ -5,8 +5,10 @@
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QSurfaceFormat>
+#include <QQmlContext>
 #include "dbusif.h"
 #include "wheelarea.h"
+#include "lm_control.h"
 
 #define WIDTH 800
 #define HEIGHT 480
@@ -21,6 +23,7 @@ int main(int argc, char ** argv)
     qmlRegisterType<WheelArea>("lbs.plugin.wheelarea", 1, 0, "WheelArea");
 
     int rc = 0;
+    lm_control lmc;
 
     QQmlEngine engine;
     QQmlComponent *component = new QQmlComponent(&engine);
@@ -33,6 +36,9 @@ int main(int argc, char ** argv)
         qWarning("%s", qPrintable(component->errorString()));
         return -1;
     }
+
+    QQmlContext *context = engine.rootContext();
+    context->setContextProperty("lm_control", (QObject*)&lmc);
 
     QObject *topLevel = component->create();
 

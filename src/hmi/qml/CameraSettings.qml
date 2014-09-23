@@ -97,20 +97,30 @@ HMIMenu {
 
 	function showSurfaces()
 	{
-		Genivi.lm_message(dbusIf,"ServiceConnect",["uint32",dbusIf.pid()]);
-		Genivi.lm_message(dbusIf,"SetSurfaceDestinationRegion",["uint32",2000+Genivi.g_map_handle[1],"uint32",map.x,"uint32",map.y,"uint32",map.width,"uint32",map.height]);
-		Genivi.lm_message(dbusIf,"SetSurfaceSourceRegion",["uint32",2000+Genivi.g_map_handle[1],"uint32",0,"uint32",0,"uint32",map.width,"uint32",map.height]);
-		Genivi.lm_message(dbusIf,"SetSurfaceVisibility",["uint32",2000+Genivi.g_map_handle[1],"boolean",true]);
-		Genivi.lm_message(dbusIf,"CommitChanges",[]);
-		Genivi.lm_message(dbusIf,"ServiceDisconnect",["uint32",dbusIf.pid()]);
+		//Genivi.lm_message(dbusIf,"ServiceConnect",["uint32",dbusIf.pid()]);
+		//Genivi.lm_message(dbusIf,"SetSurfaceDestinationRegion",["uint32",2000+Genivi.g_map_handle[1],"uint32",map.x,"uint32",map.y,"uint32",map.width,"uint32",map.height]);
+		//Genivi.lm_message(dbusIf,"SetSurfaceSourceRegion",["uint32",2000+Genivi.g_map_handle[1],"uint32",0,"uint32",0,"uint32",map.width,"uint32",map.height]);
+		//Genivi.lm_message(dbusIf,"SetSurfaceVisibility",["uint32",2000+Genivi.g_map_handle[1],"boolean",true]);
+		//Genivi.lm_message(dbusIf,"CommitChanges",[]);
+		//Genivi.lm_message(dbusIf,"ServiceDisconnect",["uint32",dbusIf.pid()]);
+		lm_control.surface_set_destination_rectangle(
+			2000+Genivi.g_map_handle[1], 3, 109, map.width, map.height);
+			//2000+Genivi.g_map_handle[1], map.x, map.y, map.width, map.height);
+		lm_control.surface_set_source_rectangle(
+			2000+Genivi.g_map_handle[1], 3, 109, map.width, map.height);
+			//2000+Genivi.g_map_handle[1], map.x, map.y, map.width, map.height);
+		lm_control.surface_set_visibility(2000+Genivi.g_map_handle[1], 1);
+		lm_control.commit_changes();
 	}
 
 	function hideSurfaces()
 	{
-		Genivi.lm_message(dbusIf,"ServiceConnect",["uint32",dbusIf.pid()]);
-		Genivi.lm_message(dbusIf,"SetSurfaceVisibility",["uint32",2000+Genivi.g_map_handle[1],"boolean",false]);
-		Genivi.lm_message(dbusIf,"CommitChanges",[]);
-		Genivi.lm_message(dbusIf,"ServiceDisconnect",["uint32",dbusIf.pid()]);
+		//Genivi.lm_message(dbusIf,"ServiceConnect",["uint32",dbusIf.pid()]);
+		//Genivi.lm_message(dbusIf,"SetSurfaceVisibility",["uint32",2000+Genivi.g_map_handle[1],"boolean",false]);
+		//Genivi.lm_message(dbusIf,"CommitChanges",[]);
+		//Genivi.lm_message(dbusIf,"ServiceDisconnect",["uint32",dbusIf.pid()]);
+		lm_control.surface_set_visibility(2000+Genivi.g_map_handle[1], 0);
+		lm_control.commit_changes();
 	}
 
 	function move_start(lat, lon)

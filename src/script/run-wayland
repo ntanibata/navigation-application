@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cd /home/app/genivi/navigation-application/src/script
+
+# D-Bus setup
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/5000/dbus/user_bus_socket
+
+export XDG_RUNTIME_DIR=/var/run/user/5000
+
+# Platform is wayland of drm-backend
+export QT_QPA_PLATFORM=wayland
+
+# Create Window OpenGL (Default gtk_drawing_area)
+export NAVIT_GRAPHICS=opengl
+
+# Graphics OpneGL Platfrom
+export NAVIT_PLATFORM=wayland
+
+./run -v |& tee /tmp/wayland.log &

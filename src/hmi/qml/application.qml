@@ -34,6 +34,7 @@ import "Core/genivi.js" as Genivi;
 
 ApplicationWindow {
 	id: container
+	visible: true
 	width: 800; height: 480
 	property Item component;
 	function load(page)
